@@ -1,0 +1,12 @@
+/* Desktop Styles */
+@media only screen and (min-width: 900px) {
+  .container{
+    width: 80vw;
+  }
+  .search button{
+    font-size: 1.3em;
+  }
+  .search input{
+    font-size:1.6em;
+  }
+}

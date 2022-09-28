@@ -11,10 +11,10 @@ body{
   border-radius: 0.62em;
   box-shadow: 0 1.25em 1.8em rgba(8, 21, 65, 0.25);
   background-color: white;
-  width: 80vw;
+  width: 90vw;
   position: absolute;
-  transform: translate(-50%, -50%); /*repositions an element in the horizontal and/or vertical directions*/
-  top: 50%;
+  transform: translate(-50%); /*repositions an element in the horizontal and/or vertical directions*/
+  top: 10%;
   left: 50%;
 }
 .search{
@@ -23,15 +23,18 @@ body{
   gap: 1.25em;
 }
 .search button{
-  font-size: 1em;
+  font-size: 1.4em;
   background-color: #1C86EE;
   color: white;
   padding: 0.8em 0;
   border: none;
   border-radius: 1.5em;
 }
+.search button:hover{
+color: black;
+}
 .search input{
-  font-size:1.2em;
+  font-size:1.8em;
   padding: 0 0.62em;
   border: none;
   border-bottom: 2px solid blue;

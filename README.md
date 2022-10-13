@@ -8,7 +8,7 @@
   <p align="center">
   A tool to search for information about books. Powered by  APIs
     <br />
-    <a href="https://gabriele-stringano.github.io/counter-js/"><strong>Try the program »</strong></a>
+    <a href="https://glistening-lily-15ec07.netlify.app/"><strong>Try the program »</strong></a>
   </p>
 </div>
 
@@ -49,6 +49,7 @@ As a Start2impact student, I developed this application to put my newly acquired
 * [![Html][Html.js]][Html-url]
 * [![Css][Css.js]][Css-url]
 * [![Javascript][Javascript.js]][Javascript-url]
+* [![NodeJs][NodeJs.js]][NodeJs-url]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -71,11 +72,14 @@ As a Start2impact student, I developed this application to put my newly acquired
 
 To get a local copy up and running follow these simple example steps:
 <ol>
-<li> Go to  https://github.com/Gabriele-Stringano/ and press the green button </li>
+<li> Go to  https://github.com/Gabriele-Stringano/Pocket-Library and press the green button </li>
 <li> Select Download zipper </li>
 <li> Open the zipper and extract the folder </li>
 <li> Open a text editor and add the extracted folder </li>
-<li> .....</li>
+<li> Install the dependencies: npm install</li>
+<li> Run the Program: npm run dev</li>
+<li> The browser should open automatically</li>
+<li> Check out for index.html in the /dist folder for manual start </li>
 </ol>
 
 ### Prerequisites
@@ -83,7 +87,7 @@ You need to own these programs:
 <ul>
     <li> A text editor-IDE </li>
     <li> A program to unzip files</li>
-    <li> .....</li>
+    <li> Instal Node.js</li>
 </ul>
 
 
@@ -92,7 +96,7 @@ You need to own these programs:
 
 Gabriele Stringano Email: - gabrielestringano@gmail.com
 
-Project Link: - https://github.com/Gabriele-Stringano/counter-js
+Project Link: - https://github.com/Gabriele-Stringano/Pocket-Library
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -105,7 +109,7 @@ List of resources I used:
 
 * [GitHub](https://github.com)
 * [Start2Impact](https://www.start2impact.it/)
-* [Atom](https://atom.io/) !!
+* [Visual-Studio](https://code.visualstudio.com/)
 * [Best-README-Template](https://github.com/ferneynava/Best-README-Template)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -123,3 +127,5 @@ List of resources I used:
 [Css-url]: https://en.wikipedia.org/wiki/CSS
 [Javascript.js]: https://img.shields.io/static/v1?message=JAVASCRIPT&logo=JavaScript&labelColor=5c5c5c&color=efd81d&logoColor=white&label=%20&style=FOR-THE-BADGE
 [Javascript-url]: https://en.wikipedia.org/wiki/JavaScript
+[NodeJs.js]: https://img.shields.io/badge/Js-Node.js-brightgreen
+[NodeJs-url]: https://nodejs.org/en/

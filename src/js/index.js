@@ -1,55 +1,64 @@
 import '../css/mobile.css';
 import '../css/desktop.css';
+const axios = require('axios').default;
+
 
 let searchBtn= document.getElementById('search');
 let subjectsInput = document.getElementById('subjects');
-let ofsett = 0;
-let buttonAlreadyExist = 0;
+let ofsett = 0; //is used to navigate through the list of books (makes use of the api settings);
 
 
 // list of functions:
 
 //returns a list of books, searched by genre
-function searchByGenres(){
-  let url = `https://openlibrary.org/subjects/${subjectsInput.value}.json?offset=${ofsett}&limit=12`;
-  console.log(url);
-  fetch(url)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-      let worksArray = data.works;
-      worksArray.forEach((item, i) => {
-      console.log(item.title);
-      let li = document.createElement('div');
-      li.className = 'titles';
-      li.id= `${item.key}`;
-      li.append(item.title);
-      result.append(li);
-      });
-  });
+async function searchByGenres(){
+  try{
+    let url = `https://openlibrary.org/subjects/${subjectsInput.value.toLowerCase()}.json?offset=${ofsett}&limit=13`;
+    let response = await axios.get(url);
+        deleteContent(result)  //removes the message of waiting results
+        deleteContent(buttons) //Avoids an overlap of buttons caused by repeated clicking
+        if (response.data.work_count == 0) throw 'errorLenght'; //the search had no results
+        let worksArray = response.data.works;
+        worksArray.forEach((item, i) => {
+         let li = document.createElement('div');
+         li.className = 'titles';
+         li.id= `${item.key}`;
+         li.append(item.title);
+         result.append(li);
+         startSearchByKeys(li);
+    });
+    addButtonsNavigation();
+  } catch (e) {
+    console.log(e);
+    deleteContent(result)
+    let messageError = document.createElement('h2');
+    if (e == 'errorLenght') messageError.append('Genere non disponibile');
+    else messageError.append('Errore, riprovare oppure cambiare chiave di ricerca');
+    result.append(messageError);
+  }
 }
 
 //returns the description of the selected book
 function searchByKeys(event){
   let url = `https://openlibrary.org${event.target.id}.json`;
-  fetch(url)
-  .then((response) => response.json())
-  .then((data) => {
-  console.log(data); //alcuni sfruttano degli oggetti!
+  axios.get(url)
+  .then((response) => {
   let titleBook = document.createElement('div');
-  titleBook.append(data.title);
-  result.append(titleBook);
-  titleBook.className = 'titleBook';
-  let descriptionBook = document.createElement('div');
-  descriptionBook.append(data.description);
-  descriptionBook.className = 'descriptionBook';
-  result.append(descriptionBook);
+  divMaker(titleBook, 'titleBook', response.data.title);
+  if (typeof response.data.description == "string"){
+    let descriptionBook = document.createElement('div');
+    divMaker(descriptionBook, 'descriptionBook', response.data.description);
+  }
+  else{
+    let searchResult = document.createElement('h2');
+    searchResult.append('Descrizione non disponibile');
+    result.append(searchResult);
+  }
   }); 
 }
 
-//dewcriine
+//append 2 buttons below the list of books so you can browse through the titles (we assign dedicated events to them)
 function addButtonsNavigation(){
-  buttonAlreadyExist = 1;
   let previus = document.createElement('input');//declaration new button
   buttonMaker(previus, 'previus');//insertion button in html
   previusSearch(previus, );
@@ -58,7 +67,7 @@ function addButtonsNavigation(){
   followingSearch(following);
 }
 
-//this function allows us to initialize and append a button
+//this function allows us to append a button
 function buttonMaker(node,name){ 
   node.classList.add('btn'); //used for style css
   node.setAttribute('type', 'button');
@@ -67,50 +76,71 @@ function buttonMaker(node,name){
   buttons.append(node);
 }
 
-//cleans the contents of the div result !!!CAMBIA IL NOME
-function deleteList(node){
+//this function allows us to append a div with a response content
+function divMaker(node, className, responseValue){
+  result.append(node);
+  node.className = className;
+
+  node.append(responseValue);
+}
+
+//clean the contents of the div
+function deleteContent(node){
   while (node.firstChild) {
     node.removeChild(node.lastChild);
   }
 }
 
+//append a <h3> message, used to alert about the loading of resources 
+function waitingMessage (){
+  let messageWaiting = document.createElement('h3');
+  messageWaiting.append('Attesa risultati');
+  result.append(messageWaiting);
+}
 
-// List of events + functionEvents
+// List of events + functionEvents:
 
+//allows you to search a list of books by searching by genre, by clicking on the search button!
 searchBtn.addEventListener('click', () => {
   ofsett = 0;
-  deleteList(result)
+  deleteContent(result)
+  deleteContent(buttons)
+  waitingMessage();
   searchByGenres();
-  if(buttonAlreadyExist == 0) addButtonsNavigation();
 });
 
-//fammi sfruttare l'add button
-result.addEventListener('click', (event) => { 
-  deleteList(result);
-  deleteList(buttons);
-  searchByKeys(event)
+//allows you to get the description of the selected book, by clicking on the title!
+function startSearchByKeys(element){
+  element.addEventListener('click', (event) => { 
+    deleteContent(result); //clear the result div
+    deleteContent(buttons);//clear the buttons div
+    searchByKeys(event)
 
-});
+  });
+}
 
+//allows the 'previus' button to go back with the list of books, by clicking it
 function previusSearch(previus){
   previus.addEventListener('click', (event) => { 
     if (ofsett > 0){
-      ofsett = ofsett - 12;
-      console.log(ofsett);
+      ofsett = ofsett - 13;
     }
     else{
       ofsett=0; //useful to avoid bugs
     }
-    deleteList(result);
+    deleteContent(result);
+    waitingMessage();
     searchByGenres();
   });
 }
 
+//allows the 'followin' button to move forward with the list of books, by clicking it
 function followingSearch(following){
   following.addEventListener('click', (event) => { 
-    ofsett = ofsett + 12;
+    ofsett = ofsett + 13;
     console.log(ofsett);
-    deleteList(result);
+    deleteContent(result);
+    waitingMessage();
     searchByGenres();
   });
 }

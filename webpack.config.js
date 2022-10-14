@@ -1,6 +1,6 @@
 const path = require('path'); //modulo nativo importato per aiutarci con i percorsi assoluti!
 const HtmlWebpackPlugin = require('html-webpack-plugin');//12)importo il plugin nel webpackconfig
-const CopyPlugin = require("copy-webpack-plugin");
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports={          //esportiamo un oggetto che e' l'oggetto di configurazione di webpack
   entry: {
@@ -35,6 +35,7 @@ module.exports={          //esportiamo un oggetto che e' l'oggetto di configuraz
       title: 'applicazione webpack',
       template: './src/index.html'
     }),
+    new FaviconsWebpackPlugin()
   ],          //loaders
   devServer: {
     port: 5000,

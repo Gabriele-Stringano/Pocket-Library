@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="images/favicon.jpg" alt="Logo" width="80" height="80">
+    <img src="src/img/favicon.jpg" alt="Logo" width="80" height="80">
 
   <h3 align="center">Pocket-Library by Gabriele Stringano</h3>
 

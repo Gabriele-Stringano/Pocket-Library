@@ -96,8 +96,7 @@ You need to own these programs:
 
 Gabriele Stringano Email: - gabrielestringano@gmail.com
 
-Project Link: - https://github.com/Gabriele-Stringano/Pocket-Library
-
+My Project: - https://github.com/Gabriele-Stringano/
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 

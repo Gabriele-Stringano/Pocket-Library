@@ -18,16 +18,7 @@ module.exports={          //esportiamo un oggetto che e' l'oggetto di configuraz
     },
     {
       test: /\.(jpg|png)$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'img/',
-            publicPath: 'img/'
-          }
-        }
-      ]
+      type: 'asset/resource'
     }
   ] },  //loaders
   plugins: [

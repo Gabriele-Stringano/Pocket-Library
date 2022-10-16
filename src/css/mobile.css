@@ -5,7 +5,8 @@
  }
 
 body{
-  background-color: #1C86EE;
+  background-image: url("../img/backgroundWood.png");
+
  }
 .container{
   padding: 3em 2.5em;

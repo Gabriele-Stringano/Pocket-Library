@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="src/img/favicon.jpg" alt="Logo" width="80" height="80">
+    <img src="logo.png" alt="Logo" width="80" height="80">
 
   <h3 align="center">Pocket-Library by Gabriele Stringano</h3>
 
@@ -35,7 +35,7 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## 💡About The Project
 
 As a Start2impact student, I developed this application to put my newly acquired knowledge of JavaScript into practice.
 
@@ -57,7 +57,7 @@ As a Start2impact student, I developed this application to put my newly acquired
 
 <!-- How it Work + ScreenShot -->
 
-## How it Work
+## ⚙️How it Work
 
 -
 
@@ -68,7 +68,7 @@ As a Start2impact student, I developed this application to put my newly acquired
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## ❗Getting Started
 
 To get a local copy up and running follow these simple example steps:
 <ol>
@@ -92,7 +92,7 @@ You need to own these programs:
 
 
 <!-- CONTACT -->
-## Contact
+## 📲Contact
 
 Gabriele Stringano Email: - gabrielestringano@gmail.com
 
@@ -103,7 +103,7 @@ Project Link: - https://github.com/Gabriele-Stringano/Pocket-Library
 
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+## 📚Acknowledgments
 
 List of resources I used:
 

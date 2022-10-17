@@ -20,20 +20,32 @@ async function searchByGenres(){
         if (response.data.work_count == 0) throw 'errorLenght'; //the search had no results
         let worksArray = response.data.works;
         worksArray.forEach((item, i) => {
-         let li = document.createElement('div');
-         li.className = 'titles';
-         li.id= `${item.key}`;
-         li.append(item.title);
-         result.append(li);
-         startSearchByKeys(li);
+         let element = document.createElement('div');
+         element.className = 'list';
+         element.id= `${item.key}`;
+         element.innerHTML= '<b>Title</b>: '+item.title+ "<br>";
+         let authors = item.authors;
+         element.innerHTML += '<b>Authors</b>: ';
+         authors.forEach((author, i)=> {
+          console.log(i);
+          console.log(authors.length);
+          if(authors.length == (i+1)){
+            element.innerHTML += author.name;
+          }
+          else{
+            element.innerHTML += author.name +', ';
+          }
+         });
+         result.append(element);
+         startSearchByKeys(element);
     });
     addButtonsNavigation();
   } catch (e) {
     console.log(e);
     deleteContent(result)
     let messageError = document.createElement('h2');
-    if (e == 'errorLenght') messageError.append('Genere non disponibile');
-    else messageError.append('Errore, riprovare oppure cambiare chiave di ricerca');
+    if (e == 'errorLenght') messageError.append('Genre not found');
+    else messageError.append('Error, try again or change search key');
     result.append(messageError);
   }
 }
@@ -94,7 +106,7 @@ function deleteContent(node){
 //append a <h3> message, used to alert about the loading of resources 
 function waitingMessage (){
   let messageWaiting = document.createElement('h3');
-  messageWaiting.append('Attesa risultati');
+  messageWaiting.append('Waiting for results');
   result.append(messageWaiting);
 }
 

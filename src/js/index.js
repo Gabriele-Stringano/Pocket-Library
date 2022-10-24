@@ -5,7 +5,7 @@ const axios = require('axios').default;
 
 let searchBtn= document.getElementById('search');
 let subjectsInput = document.getElementById('subjects');
-let ofsett = 0; //is used to navigate through the list of books (makes use of the api settings);
+let offsett = 0; //is used to navigate through the list of books (makes use of the api settings);
 
 
 // list of functions:
@@ -13,9 +13,9 @@ let ofsett = 0; //is used to navigate through the list of books (makes use of th
 //returns a list of books, searched by genre
 async function searchByGenres(){
   try{
-    let url = `https://openlibrary.org/subjects/${subjectsInput.value.toLowerCase()}.json?offset=${ofsett}&limit=13`;
+    let url = `https://openlibrary.org/subjects/${subjectsInput.value.toLowerCase()}.json?offset=${offsett}&limit=11`;
     let response = await axios.get(url);
-        deleteContent(result)  //removes the message of waiting results
+        deleteContent(result)  //removes the message: 'waiting results'
         deleteContent(buttons) //Avoids an overlap of buttons caused by repeated clicking
         if (response.data.work_count == 0) throw 'errorLenght'; //the search had no results
         let worksArray = response.data.works;
@@ -51,10 +51,10 @@ async function searchByGenres(){
 }
 
 //returns the description of the selected book
-function searchByKeys(event){
+async function searchByKeys(event){
   let url = `https://openlibrary.org${event.target.id}.json`;
-  axios.get(url)
-  .then((response) => {
+  let response = await axios.get(url);
+  deleteContent(result)  //removes the message: 'waiting results'
   let titleBook = document.createElement('div');
   divMaker(titleBook, 'titleBook', response.data.title);
   if (typeof response.data.description == "string"){
@@ -63,17 +63,16 @@ function searchByKeys(event){
   }
   else{
     let searchResult = document.createElement('h2');
-    searchResult.append('Descrizione non disponibile');
+    searchResult.append('Description unavailable');
     result.append(searchResult);
   }
-  }); 
 }
 
 //append 2 buttons below the list of books so you can browse through the titles (we assign dedicated events to them)
 function addButtonsNavigation(){
-  let previus = document.createElement('input');//declaration new button
-  buttonMaker(previus, 'previus');//insertion button in html
-  previusSearch(previus, );
+  let previous = document.createElement('input');//declaration new button
+  buttonMaker(previous, 'previous');//insertion button in html
+  previousSearch(previous, );
   let following = document.createElement('input');//declaration new button
   buttonMaker(following, 'following');//insertion button in html
   followingSearch(following);
@@ -114,7 +113,7 @@ function waitingMessage (){
 
 //allows you to search a list of books by searching by genre, by clicking on the search button!
 searchBtn.addEventListener('click', () => {
-  ofsett = 0;
+  offsett = 0;
   deleteContent(result)
   deleteContent(buttons)
   waitingMessage();
@@ -126,19 +125,19 @@ function startSearchByKeys(element){
   element.addEventListener('click', (event) => { 
     deleteContent(result); //clear the result div
     deleteContent(buttons);//clear the buttons div
-    searchByKeys(event)
-
+    waitingMessage ();
+    searchByKeys(event);
   });
 }
 
-//allows the 'previus' button to go back with the list of books, by clicking it
-function previusSearch(previus){
-  previus.addEventListener('click', (event) => { 
-    if (ofsett > 0){
-      ofsett = ofsett - 13;
+//allows the 'previous' button to go back with the list of books, by clicking it
+function previousSearch(previous){
+  previous.addEventListener('click', (event) => { 
+    if (offsett > 0){
+      offsett = offsett - 11;
     }
     else{
-      ofsett=0; //useful to avoid bugs
+      offsett=0; //useful to avoid bugs
     }
     deleteContent(result);
     waitingMessage();
@@ -149,8 +148,8 @@ function previusSearch(previus){
 //allows the 'followin' button to move forward with the list of books, by clicking it
 function followingSearch(following){
   following.addEventListener('click', (event) => { 
-    ofsett = ofsett + 13;
-    console.log(ofsett);
+    offsett = offsett + 11;
+    console.log(offsett);
     deleteContent(result);
     waitingMessage();
     searchByGenres();

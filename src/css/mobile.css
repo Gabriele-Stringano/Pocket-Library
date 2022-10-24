@@ -6,7 +6,9 @@
 
 body{
   background-image: url("../img/backgroundWood.png");
-
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
  }
 .container{
   padding: 3em 2.5em;

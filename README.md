@@ -59,10 +59,14 @@ As a Start2impact student, I developed this application to put my newly acquired
 
 ## ⚙️How it Work
 
--
-
-[![product-screenshot1]]
-
+- The site allows users to search for books by desired genre and view information such as: title, authors, and description. All in the English language.</br>
+The text box is an Input element. By pressing on the Search button, the browser will contact the external service (Open Library) to get the list of books according to the genre indicated in the text box.
+![product-screenshot1]
+- A limited number of books are printed on the screen; it's possible to display other books by pressing on the following button, and it's possible to go back with the previous button. The 2 buttons work due to an eventListener each and a counter called offsett, which keeps in memory the position reached in the dataset.
+![product-screenshot2]
+- Pressing in the box of any book will execute a new request to the external service; the previously saved key is passed as the ID of the item. 
+The desciption of the book is then displayed on the page
+[![product-screenshot3]]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -118,8 +122,9 @@ List of resources I used:
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[product-screenshot1]: images/JsScreenshot1.png
-[product-screenshot2]: images/JsScreenshot2.png
+[product-screenshot1]: src/img/JsScreenshot1.png
+[product-screenshot2]: src/img/JsScreenshot2.png
+[product-screenshot3]: src/img/JsScreenshot3.png
 [Html.js]: https://img.shields.io/static/v1?message=HTML5&logo=HTML5&labelColor=5c5c5c&color=c31111&logoColor=white&label=%20&style=FOR-THE-BADGE
 [Html-url]: https://www.html.it/
 [Css.js]: https://img.shields.io/static/v1?message=CSS3&logo=css3&labelColor=5c5c5c&color=1111c3&logoColor=white&label=%20&style=FOR-THE-BADGE

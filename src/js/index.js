@@ -18,8 +18,8 @@ async function searchByGenres(){
         deleteContent(result)  //removes the message: 'waiting results'
         deleteContent(buttons) //Avoids an overlap of buttons caused by repeated clicking
         if (response.data.work_count == 0) throw 'errorLenght'; //the search had no results
-        let worksArray = response.data.works;
-        worksArray.forEach((item, i) => {
+        let worksArray = response.data.works; //Get the list of books
+        worksArray.forEach((item, i) => { //create elements with book information and append them to the document
          let element = document.createElement('div');
          element.className = 'list';
          element.id= `${item.key}`;

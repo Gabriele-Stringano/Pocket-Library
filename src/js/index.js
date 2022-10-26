@@ -1,6 +1,7 @@
 import '../css/mobile.css';
 import '../css/desktop.css';
 const axios = require('axios').default;
+const _ = require('lodash');
 
 
 let searchBtn= document.getElementById('search');
@@ -17,8 +18,8 @@ async function searchByGenres(){
     let response = await axios.get(url);
         deleteContent(result)  //removes the message: 'waiting results'
         deleteContent(buttons) //Avoids an overlap of buttons caused by repeated clicking
-        if (response.data.work_count == 0) throw 'errorLenght'; //the search had no results
-        let worksArray = response.data.works; //Get the list of books
+        if ( _.get(response.data, 'work_count', "") == 0) throw 'errorLenght'; //the search had no results
+        let worksArray = _.get(response.data, 'works', ""); //Get the list of books
         worksArray.forEach((item, i) => { //create elements with book information and append them to the document
          let element = document.createElement('div');
          element.className = 'list';
@@ -56,10 +57,12 @@ async function searchByKeys(event){
   let response = await axios.get(url);
   deleteContent(result)  //removes the message: 'waiting results'
   let titleBook = document.createElement('div');
-  divMaker(titleBook, 'titleBook', response.data.title);
-  if (typeof response.data.description == "string"){
+  let title = _.get(response.data, 'title', ""); //lodash to prevent errors
+  divMaker(titleBook, 'titleBook', title);
+  let description = _.get(response.data, 'description', ""); //lodash to prevent errors
+  if (typeof description == "string"){
     let descriptionBook = document.createElement('div');
-    divMaker(descriptionBook, 'descriptionBook', response.data.description);
+    divMaker(descriptionBook, 'descriptionBook', description);
   }
   else{
     let searchResult = document.createElement('h2');
